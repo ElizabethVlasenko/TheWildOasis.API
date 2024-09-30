@@ -1,6 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using TheWildOasis.API.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var connString = builder.Configuration.GetConnectionString("WildOasisConnectionString");
+
+builder.Services.AddDbContext<TheWildOasisDbContext>(options => options.UseSqlServer(connString));
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
